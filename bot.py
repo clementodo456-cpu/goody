@@ -1,5 +1,4 @@
 import logging
-from aiohttp import web
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder,
@@ -9,7 +8,7 @@ from telegram.ext import (
     filters,
 )
 
-from config import BOT_TOKEN, PORT
+from config import BOT_TOKEN
 from handlers.start import start_command, button_callback_handler
 from handlers.help import help_command, about_command
 from handlers.image import handle_image
@@ -20,27 +19,6 @@ logging.basicConfig(
     level=logging.INFO,
 )
 logger = logging.getLogger(__name__)
-
-
-async def health_check(request):
-    return web.Response(
-        text="GoodyTreat Background Remover Bot is operational.",
-        status=200,
-    )
-
-
-async def start_health_server():
-    app = web.Application()
-    app.router.add_get("/", health_check)
-    app.router.add_get("/health", health_check)
-
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", PORT)
-    await site.start()
-    logger.info(
-        f"Health check web server running on http://0.0.0.0:{PORT}"
-    )
 
 
 def main():
@@ -71,10 +49,7 @@ def main():
         )
     )
 
-    # Health check web server hook on startup
-    application.post_init = lambda app: start_health_server()
-
-    logger.info("Starting Telegram Bot Polling...")
+    logger.info("Starting Telegram Bot Polling on Render Background Worker...")
     application.run_polling(drop_pending_updates=True)
 
 
