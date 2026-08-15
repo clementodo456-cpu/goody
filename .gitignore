@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Environment Variables
+.env
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary Files
+temp_*
+*.tmp
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# OS & IDE
+.DS_Store
+.vscode/
+.idea/
