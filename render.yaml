@@ -7,11 +7,9 @@ services:
     buildCommand: "pip install -r requirements.txt"
     startCommand: "python bot.py"
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: BOT_TOKEN
         sync: false
       - key: ADMIN_ID
         sync: false
-      - key: REMOVEBG_API_KEY
-        sync: false
-      - key: MAX_FILE_SIZE_MB
-        value: "20"
